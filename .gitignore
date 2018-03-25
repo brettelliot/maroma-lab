@@ -99,3 +99,15 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.idea
+__pycache__
+brett_todo.txt
