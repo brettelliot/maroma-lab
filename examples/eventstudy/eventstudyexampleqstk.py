@@ -45,6 +45,8 @@ def main():
     car, std_err, num_events = calculator.calculate_car_qstk(
         event_matrix, stock_data['close'], market_symbol, look_back, look_forward)
 
+    print(std_err)
+
     plotter = Plotter()
     plotter.plot_car(car, std_err, num_events,look_back, look_forward, False, "eventstudyexampleqstk.pdf")
 

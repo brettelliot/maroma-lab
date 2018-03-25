@@ -20,8 +20,10 @@ def main():
     start_date = datetime.datetime(2009, 1, 1)
     end_date = datetime.datetime(2016, 12, 31)
     value_threshold = 7
-    look_back = 20
-    look_forward = 20
+    estimation_window = 200
+    buffer = 5
+    pre_event_window = 10
+    post_event_window = 10
     csv_file_name = './data/eventdates.csv'
 
     print("Collecting historical stock data")
@@ -42,11 +44,11 @@ def main():
     # print(event_matrix[(event_matrix == 1.0).any(axis=1)])
 
     calculator = Calculator()
-    car, std_err, num_events = calculator.calculate_car_qstk(
-        event_matrix, stock_data['close'], market_symbol, look_back, look_forward)
+    ccr = calculator.calculate_cars_cavcs(event_matrix, stock_data['close'], market_symbol,
+                                          estimation_window, buffer, pre_event_window, post_event_window)
 
     plotter = Plotter()
-    plotter.plot_car(car, std_err, num_events,look_back, look_forward, False, "eventstudyexample.pdf")
+    plotter.plot_car(ccr.cars, ccr.cars_std_err, ccr.num_events, pre_event_window, post_event_window, False, "eventstudyexample-car.pdf")
 
 
 if __name__ == "__main__":
