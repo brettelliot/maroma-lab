@@ -1,0 +1,34 @@
+*** Final Results and Plots *****
+
+****************
+
+CARS and CAVCS results for the whole group of stocks
+
+numof events  =  16
+************************
+
+CARS Results
+
+*********
+Cars numof stocks +ve  = 0
+Cars numof stocks -ve  = 1
+
+Cars t-test- value = -0.8876633950420562
+
+Cars siginificant ?  :False
+Cars +ve ? : False
+
+****************
+
+Cavcs Results
+
+*********
+cars numof stocks +ve  = 0
+cars numof stocks -ve  = 1
+
+Cavcs full t-test value = -0.16408535160741833
+
+Cars siginificant ?  : False
+Cavcs +ve ? : False
+
+************************
