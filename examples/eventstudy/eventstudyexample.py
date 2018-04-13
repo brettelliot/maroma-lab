@@ -41,7 +41,7 @@ def main():
     event_matrix = eem.build_event_matrix(start_date, end_date)
 
     print("Number of events:" + str(len(event_matrix[(event_matrix == 1.0).any(axis=1)])))
-    # print(event_matrix[(event_matrix == 1.0).any(axis=1)])
+    print(event_matrix[(event_matrix == 1.0).any(axis=1)])
 
     calculator = Calculator()
     ccr = calculator.calculate_cars_cavcs(event_matrix, stock_data['close'], market_symbol,
