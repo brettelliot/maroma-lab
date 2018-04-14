@@ -25,9 +25,6 @@ def main():
     #stderr_log_handler.setFormatter(formatter)
 
 
-    logger.info('Info message')
-    #logger.error('Error message')
-
     # Define the symbols to study
     symbols = ['S3']
 
@@ -66,56 +63,30 @@ def main():
     
     #print(event_matrix[event_matrix['S1'] == 1])
 
-    logger.info("Number of events:" + str(len(event_matrix[(event_matrix == 1.0).any(axis=1)])))
+    logger.info("Number of events: " + str(len(event_matrix[(event_matrix == 1.0).any(axis=1)])))
     #logger.info(event_matrix[(event_matrix == 1.0).any(axis=1)])
 
     #import pdb; pdb.set_trace()
 
     calculator = Calculator()
-    ccr = calculator.calculate_cars_cavcs(event_matrix, stock_data[['adjusted_close','volume']], market_symbol,\
+    ccr = calculator.calculate_cars_cavcs(event_matrix, stock_data[['adjusted_close','volume']], market_symbol,
                                           estimation_window, buffer, pre_event_window, post_event_window)
                                           
     # print results to file and Plots
-    #******************
-    
-    #import pdb; pdb.set_trace()
-
-    
-    logger.info('*** Final Results and Plots *****\n\n')
-    logger.info('****************\n\n')
-    
-    logger.info('CARS and CAVCS results for the whole group of stocks\n\n')
-    
-    logger.info('numof events  =  ' +str(ccr.num_events)+'\n')
-
-    logger.info('************************\n\n')
-    logger.info('CARS Results\n\n')
-    logger.info('*********\n')
-    
-    logger.info('Cars numof stocks +ve  = ' +str(ccr.cars_num_stocks_positive)+'\n')
-    
-    logger.info('Cars numof stocks -ve  = '+str(ccr.cars_num_stocks_negative)+'\n\n')
-    
-    logger.info('Cars t-test- value = '+str(ccr.cars_t_test)+'\n\n')
-    
-    logger.info('Cars siginificant ?  :'+str(ccr.cars_significant)+'\n')
-    logger.info('Cars +ve ? : '+str(ccr.cars_positive)+'\n\n')
-    
-    
-    logger.info('****************\n\n')
-    logger.info('Cavcs Results\n\n')
-    logger.info('*********\n')
-
-    logger.info('cars numof stocks +ve  = ' +str(ccr.cavcs_num_stocks_positive)+'\n'),
-    
-    logger.info('cars numof stocks -ve  = '+str(ccr.cavcs_num_stocks_negative)+'\n\n')
-    
-    logger.info('Cavcs full t-test value = '+str(ccr.cavcs_t_test)+'\n\n')
-    
-    logger.info('Cars siginificant ?  : '+str(ccr.cavcs_significant)+'\n')
-    logger.info('Cavcs +ve ? : '+str(ccr.cavcs_positive)+'\n\n')
-    
-    logger.info('************************\n')
+    logger.info('CARS and CAVCS results for the whole group of stocks')
+    logger.info('  Number of events  =  ' +str(ccr.num_events))
+    logger.info('CARS Results')
+    logger.info('  CARS number of stocks +ve = ' +str(ccr.cars_num_stocks_positive))
+    logger.info('  CARS number of stocks -ve = '+str(ccr.cars_num_stocks_negative))
+    logger.info('  CARS t-test value = '+str(ccr.cars_t_test))
+    logger.info('  CARS significant = '+str(ccr.cars_significant))
+    logger.info('  CARS +ve = '+str(ccr.cars_positive))
+    logger.info('CAVCS Results')
+    logger.info('  CAVCS number of stocks +ve = ' +str(ccr.cavcs_num_stocks_positive))
+    logger.info('  CAVCS number of stocks -ve = '+str(ccr.cavcs_num_stocks_negative))
+    logger.info('  CAVCS full t-test value = '+str(ccr.cavcs_t_test))
+    logger.info('  CAVCS significant = '+str(ccr.cavcs_significant))
+    logger.info('  CAVCS +ve = '+str(ccr.cavcs_positive))
 
 
     
