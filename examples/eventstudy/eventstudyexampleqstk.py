@@ -8,7 +8,8 @@ from maroma.lab.plotter import Plotter
 def main():
 
     # Define the symbols to study
-    symbols = ['S1', 'S2', 'S3']
+    #symbols = ['S1', 'S2', 'S3']
+    symbols = ['S1']
 
     # Define the market symbol to compare against
     market_symbol = "MKT"
@@ -20,8 +21,8 @@ def main():
     start_date = datetime.datetime(2009, 1, 1)
     end_date = datetime.datetime(2016, 12, 31)
     value_threshold = 7
-    look_back = 20
-    look_forward = 20
+    look_back = 0
+    look_forward = 10
     csv_file_name = './data/eventdates.csv'
 
     print("Collecting historical stock data")
@@ -48,7 +49,7 @@ def main():
     print(std_err)
 
     plotter = Plotter()
-    plotter.plot_car(car, std_err, num_events,look_back, look_forward, False, "eventstudyexampleqstk.pdf")
+    plotter.plot_car(car, std_err, num_events,look_back, look_forward, True, "eventstudyexampleqstk.pdf")
 
 
 if __name__ == "__main__":

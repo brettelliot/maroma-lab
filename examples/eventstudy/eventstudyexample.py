@@ -26,7 +26,9 @@ def main():
 
 
     # Define the symbols to study
-    symbols = ['S3']
+    symbols = ['S1']  # RGR
+    #symbols = ['S2']  # OLN
+    #symbols = ['S3']  # AOBC
 
     # Define the market symbol to compare against
     market_symbol = "MKT"
@@ -41,7 +43,7 @@ def main():
     value_threshold = 7
     estimation_window = 200
     buffer = 5
-    pre_event_window = 5
+    pre_event_window = 10
     post_event_window = 10
     csv_file_name = './data/eventdates.csv'
 
@@ -76,17 +78,17 @@ def main():
     logger.info('CARS and CAVCS results for the whole group of stocks')
     logger.info('  Number of events  =  ' +str(ccr.num_events))
     logger.info('CARS Results')
-    logger.info('  CARS number of stocks +ve = ' +str(ccr.cars_num_stocks_positive))
-    logger.info('  CARS number of stocks -ve = '+str(ccr.cars_num_stocks_negative))
+    logger.info('  Number of stocks with +CARS = ' +str(ccr.cars_num_stocks_positive))
+    logger.info('  Number of stocks with -CARS = '+str(ccr.cars_num_stocks_negative))
     logger.info('  CARS t-test value = '+str(ccr.cars_t_test))
     logger.info('  CARS significant = '+str(ccr.cars_significant))
-    logger.info('  CARS +ve = '+str(ccr.cars_positive))
+    logger.info('  CARS positive = '+str(ccr.cars_positive))
     logger.info('CAVCS Results')
-    logger.info('  CAVCS number of stocks +ve = ' +str(ccr.cavcs_num_stocks_positive))
-    logger.info('  CAVCS number of stocks -ve = '+str(ccr.cavcs_num_stocks_negative))
+    logger.info('  Number of stocks with +CAVCS = ' +str(ccr.cavcs_num_stocks_positive))
+    logger.info('  Number of stocks with -CAVCS = '+str(ccr.cavcs_num_stocks_negative))
     logger.info('  CAVCS full t-test value = '+str(ccr.cavcs_t_test))
     logger.info('  CAVCS significant = '+str(ccr.cavcs_significant))
-    logger.info('  CAVCS +ve = '+str(ccr.cavcs_positive))
+    logger.info('  CAVCS positive = '+str(ccr.cavcs_positive))
 
 
     
@@ -94,10 +96,10 @@ def main():
     
     #import pdb; pdb.set_trace()
 
-    #plotter = Plotter()
+    plotter = Plotter()
     #import pdb; pdb.set_trace()
-    #plotter.plot_car(ccr.num_events,ccr.cars, ccr.cars_std_err, ccr.cavcs,ccr.cavcs_std_err,
-    #                 pre_event_window, post_event_window, True,'ccrplot.pdf')
+    plotter.plot_car_cavcs(ccr.num_events,ccr.cars, ccr.cars_std_err, ccr.cavcs,ccr.cavcs_std_err,
+                     pre_event_window, post_event_window, True,'ccrplot.pdf')
 
 
 if __name__ == "__main__":

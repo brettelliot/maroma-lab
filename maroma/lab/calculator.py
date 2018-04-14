@@ -149,11 +149,13 @@ class Calculator(object):
         num_events = len(event_matrix[(event_matrix == 1.0).any(axis=1)])
         
         events = event_matrix[(event_matrix == 1.0).any(axis=1)]
-        
+
+        dates = stock_data.loc['MKT', slice(None)].index
         date1 = events.index[0]
-        
-        date11  = date1 - dt.timedelta(5)
-        
+        index1 = dates.tolist().index(date1)
+        date11 = dates[index1 - buffer]
+        date12 = dates[index1 - (buffer + estimation_window)]
+
         #import pdb; pdb.set_trace()
         
         closing_prices  = stock_data['adjusted_close']
@@ -175,16 +177,14 @@ class Calculator(object):
             vlm_changes[symbol] = volumes[symbol].rolling(5,5).apply(mypct).fillna(0)
             #vlm_changes[symbol] = volumes[symbol].pct_change().fillna(0).apply(lambda x : min(3,x))
 
-
         
         # do regeression
-        
-        
-        pre_stock_returns = stock_ret[stock_data.index.get_level_values(1) < date11]
-        
-        pre_stock_vlms = vlm_changes[stock_data.index.get_level_values(1) < date11]
 
+        pre_stock_returns = stock_ret[
+            (stock_data.index.get_level_values(1) > date12) & (stock_data.index.get_level_values(1) <= date11)]
 
+        pre_stock_vlms = vlm_changes[
+            (stock_data.index.get_level_values(1) > date12) & (stock_data.index.get_level_values(1) <= date11)]
 
         #**************
         #First compute cars ******
