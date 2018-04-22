@@ -18,9 +18,9 @@ def main():
     symbols.append(market_symbol)
 
     # Define the start and end date of the study
-    start_date = datetime.datetime(2009, 1, 1)
-    end_date = datetime.datetime(2016, 12, 31)
-    value_threshold = 7
+    start_date = datetime.datetime(2000, 1, 1)
+    end_date = datetime.datetime(2001, 12, 31)
+    value_threshold = 1
     look_back = 0
     look_forward = 10
     csv_file_name = './data/eventdates.csv'
@@ -30,9 +30,12 @@ def main():
     # Get a pandas multi-indexed dataframe indexed by datetime and symbol
     stock_data_store = StockDataStore('./data/')
     stock_data = stock_data_store.get_stock_data(symbols, keys)
-    #print(stock_data.head())
+    #print(stock_data['close'])
+    #print(stock_data)
+    #exit(1)
 
     print("Building event matrix")
+    #print(stock_data.index.levels[1])
     eem = ExampleEventMatrix(stock_data.index.levels[1], symbols,
                              value_threshold, csv_file_name)
 
@@ -40,7 +43,7 @@ def main():
     event_matrix = eem.build_event_matrix(start_date, end_date)
 
     print("Number of events:" + str(len(event_matrix[(event_matrix == 1.0).any(axis=1)])))
-    # print(event_matrix[(event_matrix == 1.0).any(axis=1)])
+    print(event_matrix[(event_matrix == 1.0).any(axis=1)])
 
     calculator = Calculator()
     car, std_err, num_events = calculator.calculate_car_qstk(
@@ -48,8 +51,8 @@ def main():
 
     print(std_err)
 
-    plotter = Plotter()
-    plotter.plot_car(car, std_err, num_events,look_back, look_forward, True, "eventstudyexampleqstk.pdf")
+    #plotter = Plotter()
+    #plotter.plot_car(car, std_err, num_events,look_back, look_forward, True, "eventstudyexampleqstk.pdf")
 
 
 if __name__ == "__main__":

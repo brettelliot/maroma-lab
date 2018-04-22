@@ -333,6 +333,7 @@ class Calculator(object):
             
             ccarray.append(cars_stock)
             #df_results.loc[(slice(None),stock),'cars'].tolist()
+            print(cars_stock)
         
             cars = np.mean(cars_stock,axis=0)
             

@@ -38,12 +38,12 @@ def main():
     
 
     # Define the start and end date of the study
-    start_date = datetime.datetime(2009, 1, 1)
-    end_date = datetime.datetime(2016, 12, 31)
-    value_threshold = 7
+    start_date = datetime.datetime(2000, 1, 1)
+    end_date = datetime.datetime(2001, 12, 31)
+    value_threshold = 1
     estimation_window = 200
     buffer = 5
-    pre_event_window = 10
+    pre_event_window = 0
     post_event_window = 10
     csv_file_name = './data/eventdates.csv'
 
@@ -53,8 +53,6 @@ def main():
     stock_data_store = StockDataStore('./data/')
     
     stock_data = stock_data_store.get_stock_data(symbols, keys)
-    #print(stock_data.head())
-
 
     logger.info("Building event matrix")
     eem = ExampleEventMatrix(stock_data.index.levels[1], symbols,value_threshold, csv_file_name)
